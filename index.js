@@ -80,8 +80,6 @@ function retrieveExerciseImgFromApi(exerciseId, callback) {
     const settings = {
         url: WORKOUT_URLS.exerciseimage,
         data: {
-            license_author: "wger.de",
-            language: 2,
             exercise: exerciseId
         },
         dataType: "json",
@@ -127,7 +125,7 @@ function debug(data) {
     console.log(data);
 }
 
-//retrieveMuscleCategoryFromApi(debug);
+retrieveExerciseInfoFromApi(97, debug);
 
 var currentMuscleCategory = "";
 
@@ -145,7 +143,7 @@ function renderMuscleCategoryButtons(data) {
     let buttonTemplate = "";
     data.results.forEach(muscleCategory => {
         buttonTemplate += `<button data-category-id="${muscleCategory.id}" data-category-name="${muscleCategory.name}" class="muscle-category-button">
-            <img src="Muscle_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}"/>
+            <img src="Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}"/>
         </button>`;
     });
     const muscleCategoryPage = `
@@ -171,15 +169,14 @@ function startPageSubmitButton() {
 function renderExercisesByMuscleCategory(data) {
     let listTemplate = "";
     data.results.forEach(exercise => {
-        //TO-DO: Add a link to make the li clickable(<a href="javascript:void(0);"data-exercise-id="*id*" class="exercise-link">)
-        listTemplate += `<li>${exercise.name}</li>`;
+        listTemplate += `<li><a href="javascript:void(0);" data-exercise-id="${exercise.id}" class="exercise-link"<li>${exercise.name}</a></li>`;
     })
 
     const exerciseListPage = `
         <section class="exercise-list-page">
             <h2>Recommended Exercises for ${currentMuscleCategory}</h2>
             <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
-            <h3>Choose any of the following exercises for additional information, including repitition and set ranges:<h2>
+            <h3>Choose any of the following exercises to access detailed information, including repitition and set ranges:<h2>
 
             <ul class="exercise-list">
                 ${listTemplate}
@@ -190,10 +187,11 @@ function renderExercisesByMuscleCategory(data) {
     $("#container").html(exerciseListPage);
 }
 
-function muscleCategoryPageSubmitButtons(renderMuscleCategoryButtons) {
+function muscleCategoryPageSubmitButtons() {
     $("#container").on("click", ".muscle-category-button", function(event) {
         event.preventDefault();
 
+        //Setting global variable muscleCategoryName
         currentMuscleCategory = $(event.currentTarget).data("category-name");
 
         retrieveExercisesByCategoryIdFromApi($(event.currentTarget).data("category-id"), renderExercisesByMuscleCategory);
@@ -205,17 +203,50 @@ function backToMuscleCategoryButton() {
         event.preventDefault();
 
         retrieveMuscleCategoryFromApi(renderMuscleCategoryButtons);
+    });
+}
+
+function backToExerciseListButton() {
+    $("#container").on("click", ".back-to-exercise-list-page-button", function(event) {
+        event.preventDefault();
+
+        retrieveExercisesByCategoryIdFromApi($(event.currentTarget).data("category-id"), renderExercisesByMuscleCategory);
+    });
+}
+
+function exerciseInfoLink() {
+    $("#container").on("click", ".exercise-link", function(event) {
+        event.preventDefault();
+
+        retrieveExerciseInfoFromApi($(event.currentTarget).data("exercise-id"), renderExerciseInfo);
     })
 }
 
-function renderExerciseInfoPage(data) {
+function renderExerciseInfo(data) {
+    
 
+    const exerciseInfoPage = `
+        <section class="exercise-info-page">
+            <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
+            <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
+            <h2>Exercise Details</h2>
+            
+            <div style="background-image:url(Muscle_Diagram_Images/muscle-14.svg),url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>
+
+            <p>${data.description}</p>
+
+            
+        </section>`;
+
+    $("#container").html(exerciseInfoPage);
 }
 
 function handleSubmitButtons() {
     startPageSubmitButton();
     muscleCategoryPageSubmitButtons();
     backToMuscleCategoryButton();
+    exerciseInfoLink();
+    backToExerciseListButton(); 
  }
 
  $(handleSubmitButtons);
