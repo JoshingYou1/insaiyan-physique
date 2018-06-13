@@ -1,5 +1,21 @@
 "use strict";
 
+/*const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+
+function retrieveInstructionalVideosFromApi(exerciseName, callback) {
+    const setting = {
+        url: YOUTUBE_SEARCH_URL,
+        data: {
+            per_page: 4
+        },
+        dataType: "json",
+        type: "GET",
+        success: callback
+    }
+
+    $.ajax(settings);
+}*/
+
 const WORKOUT_BASE_URL = "https://wger.de/api/v2/";
 const WORKOUT_URLS = {
             
@@ -11,6 +27,7 @@ const WORKOUT_URLS = {
     exercisecomment: WORKOUT_BASE_URL + "exercisecomment",
     muscle: WORKOUT_BASE_URL + "muscle"
 }
+
 
 function retrieveExercisesByCategoryIdFromApi(categoryId, callback) {
     const settings = {
@@ -77,6 +94,7 @@ function retrieveMuscleCategoryFromApi(callback) {
 }
 
 function retrieveExerciseImgFromApi(exerciseId, callback) {
+    console.log("exercise:", exerciseId);
     const settings = {
         url: WORKOUT_URLS.exerciseimage,
         data: {
@@ -90,7 +108,7 @@ function retrieveExerciseImgFromApi(exerciseId, callback) {
     $.ajax(settings);
 }
 
-function retrieveExerciseCommentFromApi(exerciseId, callback) {
+function retrieveExerciseCommentsFromApi(exerciseId, callback) {
     const settings = {
         url: WORKOUT_URLS.exercisecomment,
         data: {
@@ -125,18 +143,18 @@ function debug(data) {
     console.log(data);
 }
 
-retrieveExerciseInfoFromApi(97, debug);
+//retrieveExerciseInfoFromApi(97, debug);
 
 var currentMuscleCategory = "";
 
 const MUSCLE_IMAGE_MAP = {
-    8: "arms.image-path",
-    9: "legs.image-path",
-    10: "abs.image-path",
+    8: "arms.jpg",
+    9: "legs.webp",
+    10: "abs.jpg",
     11: "chest.jpg",
-    12: "back.image-path",
-    13: "shoulders.image-path",
-    14: "calves.image-path"
+    12: "back.jpg",
+    13: "shoulders.jpg",
+    14: "calves.png"
 }
 
 function renderMuscleCategoryButtons(data) {
@@ -214,39 +232,67 @@ function backToExerciseListButton() {
     });
 }
 
-function exerciseInfoLink() {
+function renderExerciseInfo(data) {
+
+    //<div style="background-image:url(Muscle_Diagram_Images/muscle-14.svg),url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>
+
+    const exerciseInfoTemplate = `
+            <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
+            <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
+            <h2>${data.name}</h2>
+            <p>${data.description}</p> 
+            `;
+
+    $(".exercise-info").append(exerciseInfoTemplate);
+}
+
+function renderExerciseImages(data) {
+    let exerciseImagesTemplate = "";
+
+    for(let i = 0; i < data.results.length; i++) {
+        exerciseImagesTemplate += `<img src="${data.results[i].image}">`;
+    }
+
+    $(".exercise-images").append(exerciseImagesTemplate);
+}
+
+function renderExerciseComments(data) {
+    let exerciseCommentsTemplate = "";
+
+    for(let i = 0; i < data.results.length; i++) {
+        exerciseCommentsTemplate += `<p>${data.results[i].comment}</p>`;
+    }
+
+    $(".exercise-comments").append(exerciseCommentsTemplate);
+}
+
+function exerciseInfoLinkClickHandler() {
     $("#container").on("click", ".exercise-link", function(event) {
         event.preventDefault();
 
-        retrieveExerciseInfoFromApi($(event.currentTarget).data("exercise-id"), renderExerciseInfo);
-    })
-}
+        let exercisePageTemplate = `
+        <section class="exercise-images"></section>
+        <section class="exercise-info"></section>
+        <section class="exercise-comments"></section>
+        `;
 
-function renderExerciseInfo(data) {
-    
+        $("#container").html(exercisePageTemplate);
 
-    const exerciseInfoPage = `
-        <section class="exercise-info-page">
-            <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
-            <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
-            <h2>Exercise Details</h2>
-            
-            <div style="background-image:url(Muscle_Diagram_Images/muscle-14.svg),url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>
+        let exerciseId = $(event.currentTarget).data("exercise-id");
 
-            <p>${data.description}</p>
+        retrieveExerciseImgFromApi(exerciseId, renderExerciseImages);
+        retrieveExerciseInfoFromApi(exerciseId, renderExerciseInfo);
+        retrieveExerciseCommentsFromApi(exerciseId, renderExerciseComments);
 
-            
-        </section>`;
-
-    $("#container").html(exerciseInfoPage);
+    });
 }
 
 function handleSubmitButtons() {
     startPageSubmitButton();
     muscleCategoryPageSubmitButtons();
     backToMuscleCategoryButton();
-    exerciseInfoLink();
-    backToExerciseListButton(); 
+    backToExerciseListButton();
+    exerciseInfoLinkClickHandler();
  }
 
  $(handleSubmitButtons);
