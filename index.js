@@ -1,11 +1,14 @@
 "use strict";
 
-/*const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 
 function retrieveInstructionalVideosFromApi(exerciseName, callback) {
-    const setting = {
+    const settings = {
         url: YOUTUBE_SEARCH_URL,
         data: {
+            part: "snippet",
+            key: "AIzaSyCPPZZXxJvwD4jVho5wABPRtkv68VECla8",
+            q: `${exerciseName}`,
             per_page: 4
         },
         dataType: "json",
@@ -14,6 +17,13 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
     }
 
     $.ajax(settings);
+}
+
+retrieveInstructionalVideosFromApi("barbell tricep extension", debug);
+/*function renderExerciseVideos(data) {
+   let exerciseVideoTemplate = "";
+   
+   for(let i = 0; i < )
 }*/
 
 const WORKOUT_BASE_URL = "https://wger.de/api/v2/";
@@ -143,7 +153,7 @@ function debug(data) {
     console.log(data);
 }
 
-//retrieveExerciseInfoFromApi(97, debug);
+retrieveExerciseInfoFromApi(97, debug);
 
 var currentMuscleCategory = "";
 
@@ -235,12 +245,17 @@ function backToExerciseListButton() {
 function renderExerciseInfo(data) {
 
     //<div style="background-image:url(Muscle_Diagram_Images/muscle-14.svg),url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>
+    let equipmentTemplate = "";
 
+    for(let e of data.equipment) {
+        equipmentTemplate += `<p>${e.name}</p>`;
+    }
     const exerciseInfoTemplate = `
             <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
             <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
             <h2>${data.name}</h2>
-            <p>${data.description}</p> 
+            <p>${data.description}</p>
+            ${equipmentTemplate}
             `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
@@ -266,12 +281,23 @@ function renderExerciseComments(data) {
     $(".exercise-comments").append(exerciseCommentsTemplate);
 }
 
+function renderEquipmentByExercise(data) {
+    let equipmentInfoTemplate = "";
+
+    for(let i = 0; i < data.equipment.length; i++) {
+        equipmentInfoTemplate += `<p>${data.equipment[i].name}</p>`;
+    }
+
+    $(".exercise-equipment").append(equipmentInfoTemplate);
+}
+
 function exerciseInfoLinkClickHandler() {
     $("#container").on("click", ".exercise-link", function(event) {
         event.preventDefault();
 
         let exercisePageTemplate = `
         <section class="exercise-images"></section>
+        <section class="exercise-equipment"></section>
         <section class="exercise-info"></section>
         <section class="exercise-comments"></section>
         `;
