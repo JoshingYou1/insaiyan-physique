@@ -7,7 +7,7 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
         url: YOUTUBE_SEARCH_URL,
         data: {
             part: "snippet",
-            key: "AIzaSyCPPZZXxJvwD4jVho5wABPRtkv68VECla8",
+            key: ,
             q: `${exerciseName}`,
             per_page: 4
         },
@@ -20,11 +20,30 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
 }
 
 retrieveInstructionalVideosFromApi("barbell tricep extension", debug);
-/*function renderExerciseVideos(data) {
+function renderExerciseVideos(data) {
    let exerciseVideoTemplate = "";
    
-   for(let i = 0; i < )
-}*/
+   for (let i = 0; i < data.items.length; i++) {
+    let divId = `player${i}`; // <-------- create the divId
+    let videoDiv = `<div id="${divId}"></div>`;
+  
+    //add the videoDiv to the DOM, where ever you want it: a video container perhaps?
+    $('#video-container').append(videoDiv);
+  
+    var player;
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player(divId, { //<------- dynamically generated divId goes here
+            height: '390',
+            width: '640',
+            videoId: data.results[i].videoId,  // <----- this is contrived, please use the actual data that comes back from youtube
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+  }
+}
 
 const WORKOUT_BASE_URL = "https://wger.de/api/v2/";
 const WORKOUT_URLS = {
@@ -153,7 +172,7 @@ function debug(data) {
     console.log(data);
 }
 
-retrieveExerciseInfoFromApi(97, debug);
+//retrieveExerciseInfoFromApi(97, debug);
 
 var currentMuscleCategory = "";
 
@@ -245,17 +264,31 @@ function backToExerciseListButton() {
 function renderExerciseInfo(data) {
 
     //<div style="background-image:url(Muscle_Diagram_Images/muscle-14.svg),url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>
+
     let equipmentTemplate = "";
+    let primaryMuscleTemplate = "";
+    let secondaryMuscleTemplate = "";
 
     for(let e of data.equipment) {
         equipmentTemplate += `<p>${e.name}</p>`;
     }
+
+    for(let e of data.muscles) {
+        primaryMuscleTemplate += `<p>${e.name}</p>`
+    }
+
+    for(let e of data.muscles_secondary) {
+        secondaryMuscleTemplate += `<p>${e.name}</p>`
+    }
+
     const exerciseInfoTemplate = `
             <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
             <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
             <h2>${data.name}</h2>
             <p>${data.description}</p>
             ${equipmentTemplate}
+            ${primaryMuscleTemplate}
+            ${secondaryMuscleTemplate}
             `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
@@ -281,24 +314,13 @@ function renderExerciseComments(data) {
     $(".exercise-comments").append(exerciseCommentsTemplate);
 }
 
-function renderEquipmentByExercise(data) {
-    let equipmentInfoTemplate = "";
-
-    for(let i = 0; i < data.equipment.length; i++) {
-        equipmentInfoTemplate += `<p>${data.equipment[i].name}</p>`;
-    }
-
-    $(".exercise-equipment").append(equipmentInfoTemplate);
-}
-
 function exerciseInfoLinkClickHandler() {
     $("#container").on("click", ".exercise-link", function(event) {
         event.preventDefault();
 
         let exercisePageTemplate = `
-        <section class="exercise-images"></section>
-        <section class="exercise-equipment"></section>
         <section class="exercise-info"></section>
+        <section class="exercise-images"></section>
         <section class="exercise-comments"></section>
         `;
 
