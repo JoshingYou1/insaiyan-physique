@@ -7,9 +7,9 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
         url: YOUTUBE_SEARCH_URL,
         data: {
             part: "snippet",
-            key: ,
+            key: "",
             q: `${exerciseName}`,
-            per_page: 4
+            maxResults: 2
         },
         dataType: "json",
         type: "GET",
@@ -19,31 +19,40 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
     $.ajax(settings);
 }
 
-retrieveInstructionalVideosFromApi("barbell tricep extension", debug);
-function renderExerciseVideos(data) {
-   let exerciseVideoTemplate = "";
-   
-   for (let i = 0; i < data.items.length; i++) {
-    let divId = `player${i}`; // <-------- create the divId
-    let videoDiv = `<div id="${divId}"></div>`;
-  
-    //add the videoDiv to the DOM, where ever you want it: a video container perhaps?
-    $('#video-container').append(videoDiv);
-  
-    var player;
-        function onYouTubeIframeAPIReady() {
-          player = new YT.Player(divId, { //<------- dynamically generated divId goes here
-            height: '390',
-            width: '640',
-            videoId: data.results[i].videoId,  // <----- this is contrived, please use the actual data that comes back from youtube
-            events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
-            }
-          });
-        }
-  }
+function createYTPlayer(YTPlayerInfo) {
+    console.log(YTPlayerInfo);
+    return new YT.Player(YTPlayerInfo.id, {
+        height: '390',
+        width: '640',
+        videoId: YTPlayerInfo.videoId,
+    });
 }
+
+var youtubePlayerArray = [];
+
+function onYouTubeIframeAPIReady() {
+    youtubePlayerArray.forEach(function(item) {
+        createYTPlayer(item);
+    })
+}
+//retrieveInstructionalVideosFromApi("barbell tricep extension", debug);
+function renderExerciseVideos(data) {
+    let exerciseVideoTemplate = "";
+
+    youtubePlayerArray = [];
+
+    for (let i = 0; i < data.items.length; i++) {
+        let divId = `player${i}`;
+
+        exerciseVideoTemplate += `<div id="${divId}"></div>`;
+  
+        youtubePlayerArray.push({videoId:data.items[i].id.videoId, id:divId})
+        }
+
+    $(".exercise-videos").append(exerciseVideoTemplate);
+
+    onYouTubeIframeAPIReady();
+  }
 
 const WORKOUT_BASE_URL = "https://wger.de/api/v2/";
 const WORKOUT_URLS = {
@@ -172,7 +181,7 @@ function debug(data) {
     console.log(data);
 }
 
-//retrieveExerciseInfoFromApi(97, debug);
+retrieveExerciseInfoFromApi(97, debug);
 
 var currentMuscleCategory = "";
 
@@ -216,7 +225,7 @@ function startPageSubmitButton() {
 function renderExercisesByMuscleCategory(data) {
     let listTemplate = "";
     data.results.forEach(exercise => {
-        listTemplate += `<li><a href="javascript:void(0);" data-exercise-id="${exercise.id}" class="exercise-link"<li>${exercise.name}</a></li>`;
+        listTemplate += `<li><a href="javascript:void(0);" data-exercise-name="${exercise.name}" data-exercise-id="${exercise.id}" class="exercise-link"<li>${exercise.name}</a></li>`;
     })
 
     const exerciseListPage = `
@@ -261,10 +270,37 @@ function backToExerciseListButton() {
     });
 }
 
+function renderMuscleDiagrams(muscles) {
+    let anteriorDiagramMusclesURLs = "";
+    //url(Muscle_Diagram_Images/muscle-14.svg)
+    let anteriorMuscles = muscles.filter(function(muscle) {
+        return muscle.is_front;
+    });
+
+    let posteriorMuscles = muscles.filter(function(muscle) {
+        return !muscle.is_front;
+    });
+
+    anteriorMuscles.forEach(function(muscle) {
+        anteriorDiagramMusclesURLs += `url(Muscle_Diagram_Images/muscle-${muscle.id}.svg), `
+    });
+
+    let anteriorDiagram = `<div style="background-image:${anteriorDiagramMusclesURLs}
+        url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>`
+
+    let posteriorDiagramMusclesURLs = "";
+
+    posteriorMuscles.forEach(function(muscle) {
+        posteriorDiagramMusclesURLs += `url(Muscle_Diagram_Images/muscle-${muscle.id}.svg), `
+    });
+
+    let posteriorDiagram = `<div style="background-image:${posteriorDiagramMusclesURLs}
+            url(Muscle_Diagram_Images/muscular_system_back.svg);"></div>`
+            
+    $(".exercise-diagrams").append(anteriorDiagram, posteriorDiagram);
+}
+
 function renderExerciseInfo(data) {
-
-    //<div style="background-image:url(Muscle_Diagram_Images/muscle-14.svg),url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>
-
     let equipmentTemplate = "";
     let primaryMuscleTemplate = "";
     let secondaryMuscleTemplate = "";
@@ -285,13 +321,15 @@ function renderExerciseInfo(data) {
             <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
             <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
             <h2>${data.name}</h2>
-            <p>${data.description}</p>
             ${equipmentTemplate}
             ${primaryMuscleTemplate}
             ${secondaryMuscleTemplate}
+            <p>${data.description}</p>
             `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
+
+    renderMuscleDiagrams(data.muscles)
 }
 
 function renderExerciseImages(data) {
@@ -320,17 +358,21 @@ function exerciseInfoLinkClickHandler() {
 
         let exercisePageTemplate = `
         <section class="exercise-info"></section>
+        <section class="exercise-diagrams"></section>
         <section class="exercise-images"></section>
         <section class="exercise-comments"></section>
+        <section class="exercise-videos"></section>
         `;
 
         $("#container").html(exercisePageTemplate);
 
         let exerciseId = $(event.currentTarget).data("exercise-id");
+        let exerciseName = $(event.currentTarget).data("exercise-name");
 
         retrieveExerciseImgFromApi(exerciseId, renderExerciseImages);
         retrieveExerciseInfoFromApi(exerciseId, renderExerciseInfo);
         retrieveExerciseCommentsFromApi(exerciseId, renderExerciseComments);
+        retrieveInstructionalVideosFromApi(exerciseName, renderExerciseVideos);
 
     });
 }
