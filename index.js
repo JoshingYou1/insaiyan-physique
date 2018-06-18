@@ -286,7 +286,7 @@ function renderMuscleDiagrams(muscles) {
         anteriorDiagramMusclesURLs += `url(Muscle_Diagram_Images/muscle-${muscle.id}.svg), `
     });
 
-    let anteriorDiagram = `<div style="background-image:${anteriorDiagramMusclesURLs}
+    let anteriorDiagram = `<div class="anterior-diagram" style="background-image:${anteriorDiagramMusclesURLs}
         url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>`
 
     let posteriorDiagramMusclesURLs = "";
@@ -295,7 +295,7 @@ function renderMuscleDiagrams(muscles) {
         posteriorDiagramMusclesURLs += `url(Muscle_Diagram_Images/muscle-${muscle.id}.svg), `
     });
 
-    let posteriorDiagram = `<div style="background-image:${posteriorDiagramMusclesURLs}
+    let posteriorDiagram = `<div class="posterior-diagram" style="background-image:${posteriorDiagramMusclesURLs}
             url(Muscle_Diagram_Images/muscular_system_back.svg);"></div>`
             
     $(".exercise-diagrams").append(anteriorDiagram, posteriorDiagram);
@@ -330,7 +330,9 @@ function renderExerciseInfo(data) {
 
     $(".exercise-info").append(exerciseInfoTemplate);
 
-    renderMuscleDiagrams(data.muscles)
+    let allMuscles = data.muscles.concat(data.muscles_secondary);
+
+    renderMuscleDiagrams(allMuscles);
 }
 
 function renderExerciseImages(data) {

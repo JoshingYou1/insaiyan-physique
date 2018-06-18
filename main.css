@@ -1,4 +1,11 @@
-/*background-image: url(Muscle_Diagram_Images/muscle-14.svg),url(Muscle_Diagram_Images/muscular_system_front.svg);
+.anterior-diagram {
 height: 276px;
 background-repeat: no-repeat;
-background-size: 150px; */
+background-size: 150px; 
+}
+
+.posterior-diagram {
+height: 276px;
+background-repeat: no-repeat;
+background-size: 150px; 
+}
