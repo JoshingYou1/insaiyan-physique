@@ -25,14 +25,15 @@ function createYTPlayer(YTPlayerInfo) {
         height: '390',
         width: '640',
         videoId: YTPlayerInfo.videoId,
+        host: "https://www.youtube.com"
     });
 }
 
 var youtubePlayerArray = [];
 
 function onYouTubeIframeAPIReady() {
-    youtubePlayerArray.forEach(function(item) {
-        createYTPlayer(item);
+    youtubePlayerArray.forEach(function(video) {
+        createYTPlayer(video);
     })
 }
 //retrieveInstructionalVideosFromApi("barbell tricep extension", debug);
