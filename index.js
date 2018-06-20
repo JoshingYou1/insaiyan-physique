@@ -7,8 +7,8 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
         url: YOUTUBE_SEARCH_URL,
         data: {
             part: "snippet",
-            key: "",
-            q: `${exerciseName}`,
+            key: config.YOUTUBE_KEY,
+            q: `How to perform ${exerciseName} exercise`,
             maxResults: 2
         },
         dataType: "json",
@@ -36,7 +36,7 @@ function onYouTubeIframeAPIReady() {
         createYTPlayer(video);
     })
 }
-//retrieveInstructionalVideosFromApi("barbell tricep extension", debug);
+
 function renderExerciseVideos(data) {
     let exerciseVideoTemplate = "";
 
@@ -178,13 +178,13 @@ function retrieveMuscleInfoFromApi(exerciseId, callback) {
     $.ajax(settings);
 }
 
-function debug(data) {
+/*function debug(data) {
     console.log(data);
-}
-
-retrieveExerciseInfoFromApi(97, debug);
+}*/
 
 var currentMuscleCategory = "";
+
+var exerciseNumber = 0;
 
 const MUSCLE_IMAGE_MAP = {
     8: "arms.jpg",
@@ -200,7 +200,7 @@ function renderMuscleCategoryButtons(data) {
     let buttonTemplate = "";
     data.results.forEach(muscleCategory => {
         buttonTemplate += `<button data-category-id="${muscleCategory.id}" data-category-name="${muscleCategory.name}" class="muscle-category-button">
-            <img src="Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}"/>
+        ${muscleCategory.name}<img src="Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}"/>
         </button>`;
     });
     const muscleCategoryPage = `
@@ -233,7 +233,7 @@ function renderExercisesByMuscleCategory(data) {
         <section class="exercise-list-page">
             <h2>Recommended Exercises for ${currentMuscleCategory}</h2>
             <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
-            <h3>Choose any of the following exercises to access detailed information, including repitition and set ranges:<h2>
+            <h3>Choose any of the following exercises to access detailed information:<h2>
 
             <ul class="exercise-list">
                 ${listTemplate}
@@ -318,14 +318,15 @@ function renderExerciseInfo(data) {
         secondaryMuscleTemplate += `<p>${e.name}</p>`
     }
 
-    const exerciseInfoTemplate = `
+    let exerciseInfoTemplate = `
             <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
             <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
             <h2>${data.name}</h2>
+            <p>${data.description}</p>
+            <section class="exercise-images"></section>
             ${equipmentTemplate}
             ${primaryMuscleTemplate}
             ${secondaryMuscleTemplate}
-            <p>${data.description}</p>
             `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
@@ -333,6 +334,7 @@ function renderExerciseInfo(data) {
     let allMuscles = data.muscles.concat(data.muscles_secondary);
 
     renderMuscleDiagrams(allMuscles);
+    retrieveExerciseImgFromApi(exerciseNumber, renderExerciseImages);
 }
 
 function renderExerciseImages(data) {
@@ -362,7 +364,6 @@ function exerciseInfoLinkClickHandler() {
         let exercisePageTemplate = `
         <section class="exercise-info"></section>
         <section class="exercise-diagrams"></section>
-        <section class="exercise-images"></section>
         <section class="exercise-comments"></section>
         <section class="exercise-videos"></section>
         `;
@@ -371,8 +372,8 @@ function exerciseInfoLinkClickHandler() {
 
         let exerciseId = $(event.currentTarget).data("exercise-id");
         let exerciseName = $(event.currentTarget).data("exercise-name");
+        exerciseNumber = exerciseId;
 
-        retrieveExerciseImgFromApi(exerciseId, renderExerciseImages);
         retrieveExerciseInfoFromApi(exerciseId, renderExerciseInfo);
         retrieveExerciseCommentsFromApi(exerciseId, renderExerciseComments);
         retrieveInstructionalVideosFromApi(exerciseName, renderExerciseVideos);

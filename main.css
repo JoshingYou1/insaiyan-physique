@@ -1,11 +1,13 @@
 .anterior-diagram {
 height: 276px;
 background-repeat: no-repeat;
-background-size: 150px; 
+background-size: 150px;
+filter: hue-rotate(140deg) saturate(3);
 }
 
 .posterior-diagram {
 height: 276px;
 background-repeat: no-repeat;
-background-size: 150px; 
+background-size: 150px;
+filter: hue-rotate(140deg) saturate(3);
 }
