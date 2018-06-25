@@ -1,0 +1,20 @@
+{
+  "name": "first-capstone-project",
+  "version": "1.0.0",
+  "description": "workout application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshingYou1/workout-app-capstone.git"
+  },
+  "author": "Joshua Drumm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshingYou1/workout-app-capstone/issues"
+  },
+  "homepage": "https://github.com/JoshingYou1/workout-app-capstone#readme"
+}
