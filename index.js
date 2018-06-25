@@ -1,14 +1,14 @@
 "use strict";
 
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
-
+// console.log(process.env.YOUTUBE_KEY);
 function retrieveInstructionalVideosFromApi(exerciseName, callback) {
     const settings = {
         url: YOUTUBE_SEARCH_URL,
         data: {
             part: "snippet",
             key: config.YOUTUBE_KEY,
-            q: `How to perform ${exerciseName} exercise`,
+            q: `How to perform ${exerciseName} workout`,
             maxResults: 2
         },
         dataType: "json",
@@ -199,9 +199,8 @@ const MUSCLE_IMAGE_MAP = {
 function renderMuscleCategoryButtons(data) {
     let buttonTemplate = "";
     data.results.forEach(muscleCategory => {
-        buttonTemplate += `<button data-category-id="${muscleCategory.id}" data-category-name="${muscleCategory.name}" class="muscle-category-button">
-        ${muscleCategory.name}<img src="Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}"/>
-        </button>`;
+        buttonTemplate += `<button style="background-image: url('Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}')" data-category-id="${muscleCategory.id}" data-category-name="${muscleCategory.name}" class="muscle-category-button">
+        ${muscleCategory.name}</button>`;
     });
     const muscleCategoryPage = `
         <section class="muscle-category-page">
@@ -226,18 +225,19 @@ function startPageSubmitButton() {
 function renderExercisesByMuscleCategory(data) {
     let listTemplate = "";
     data.results.forEach(exercise => {
-        listTemplate += `<li><a href="javascript:void(0);" data-exercise-name="${exercise.name}" data-exercise-id="${exercise.id}" class="exercise-link"<li>${exercise.name}</a></li>`;
+        listTemplate += `<li><a href="javascript:void(0);" data-exercise-name="${exercise.name}" 
+        data-exercise-id="${exercise.id}" class="exercise-link"<li>${exercise.name}</a></li>`;
     })
 
     const exerciseListPage = `
         <section class="exercise-list-page">
-            <h2>Recommended Exercises for ${currentMuscleCategory}</h2>
             <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
-            <h3>Choose any of the following exercises to access detailed information:<h2>
+            <h2 class="recommended-exercises">Recommended Exercises for ${currentMuscleCategory}</h2>
+            <h3>Choose any of the following exercises to access detailed information:</h3>
 
             <ul class="exercise-list">
                 ${listTemplate}
-            </ul>    
+            </ul>
 
         </section>`;
 
@@ -341,7 +341,7 @@ function renderExerciseImages(data) {
     let exerciseImagesTemplate = "";
 
     for(let i = 0; i < data.results.length; i++) {
-        exerciseImagesTemplate += `<img src="${data.results[i].image}">`;
+        exerciseImagesTemplate += `<img class="images" src="${data.results[i].image}">`;
     }
 
     $(".exercise-images").append(exerciseImagesTemplate);

@@ -1,13 +1,92 @@
+* {
+    background-color: #10E7DC;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #FFF;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Nosifer', cursive;
+}
+
+h2 {
+    color: #FFF;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Boogaloo', cursive;
+}
+
+.recommended-exercises {
+    color: #FFF;
+    font-size: 50px;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Boogaloo', cursive;
+    color: #FFF;
+    font-size: 30px;
+    text-align: center;
+}
+
+.initialize-app-button {
+    font-family: 'Boogaloo', cursive;
+    display: block;
+    margin: auto;
+    background-color: #F79E02;
+    border-radius: 50%;
+    padding: 40px;
+    border: none;
+    font-size: 40px;
+    margin-top: 15%;
+    color: #FFF;
+}
+
+.muscle-category-button {
+    font-family: 'Boogaloo', cursive;
+    color: #0074E1;
+    border-radius: 50%;
+    width: px;
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 400px;
+    background-position-x: 50%;
+    border: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    font-size: 30px;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:link {
+    font-family: 'Boogaloo', cursive;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #F79E02;
+}
+
 .anterior-diagram {
 height: 276px;
 background-repeat: no-repeat;
 background-size: 150px;
-filter: hue-rotate(140deg) saturate(3);
 }
 
 .posterior-diagram {
 height: 276px;
 background-repeat: no-repeat;
 background-size: 150px;
-filter: hue-rotate(140deg) saturate(3);
 }
+
