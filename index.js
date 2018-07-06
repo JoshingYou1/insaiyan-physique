@@ -190,7 +190,7 @@ const MUSCLE_IMAGE_MAP = {
     8: "arms.jpg",
     9: "legs.webp",
     10: "abs.jpg",
-    11: "chest.jpg",
+    11: "chest.webp",
     12: "back.jpg",
     13: "shoulders.jpg",
     14: "calves.png"
@@ -199,16 +199,22 @@ const MUSCLE_IMAGE_MAP = {
 function renderMuscleCategoryButtons(data) {
     let buttonTemplate = "";
     data.results.forEach(muscleCategory => {
-        buttonTemplate += `<button style="background-image: url('Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}')" data-category-id="${muscleCategory.id}" data-category-name="${muscleCategory.name}" class="muscle-category-button">
-        ${muscleCategory.name}</button>`;
+        buttonTemplate += `<button style="background-image: url('Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}')" data-category-id="${muscleCategory.id}" 
+        data-category-name="${muscleCategory.name}" data-hover="${muscleCategory.name}" class="muscle-category-button"></button>
+        `;
     });
     const muscleCategoryPage = `
-        <section class="muscle-category-page">
-            <h2>Choose which muscle category you would like to focus on:</h2>
+    <nav class="muscle-category-page-nav">
+        <button class="back-to-homepage-button">Back to Homepage</button>
+    </nav>
 
+    <section class="muscle-category-page">
+        <h2 class="muscle-category-h2">Choose which muscle category you would like to focus on:</h2>
+            
+        <div class="muscle-category-button-template-div">
             ${buttonTemplate}
-
-        </section>`;
+        </div>
+    </section>`;
 
     $("#container").html(muscleCategoryPage);
 }
@@ -230,16 +236,19 @@ function renderExercisesByMuscleCategory(data) {
     })
 
     const exerciseListPage = `
-        <section class="exercise-list-page">
-            <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
-            <h2 class="recommended-exercises">Recommended Exercises for ${currentMuscleCategory}</h2>
-            <h3>Choose any of the following exercises to access detailed information:</h3>
+    <nav class="muscle-category-page-nav">
+        <button class="back-to-homepage-button">Back to Homepage</button> 
+        <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
+    </nav>
+    <section class="exercise-list-page">
+        <h2 class="recommended-exercises">Recommended Exercises for ${currentMuscleCategory}</h2>
+        <h3 class="exercise-link-h3">Choose any of the following exercises to access detailed information:</h3>
 
-            <ul class="exercise-list">
-                ${listTemplate}
-            </ul>
+        <ul class="exercise-list">
+            ${listTemplate}
+        </ul>
 
-        </section>`;
+    </section>`;
 
     $("#container").html(exerciseListPage);
 }
@@ -248,10 +257,25 @@ function muscleCategoryPageSubmitButtons() {
     $("#container").on("click", ".muscle-category-button", function(event) {
         event.preventDefault();
 
-        //Setting global variable muscleCategoryName
+        //Setting global variable currentMuscleCategory
         currentMuscleCategory = $(event.currentTarget).data("category-name");
 
         retrieveExercisesByCategoryIdFromApi($(event.currentTarget).data("category-id"), renderExercisesByMuscleCategory);
+    });
+}
+
+function backToHomepageButton() {
+    $("#container").on("click", ".back-to-homepage-button", function(event) {
+        event.preventDefault();
+
+        let homepageTemplate = `
+        <section class="start-page">
+            <h1 class="insaiyan-physique">Insaiyan Physique</h1>
+            <h2 class="start-page-h2">A workout application to help you achieve your physique goals!</h2>
+            <button class="initialize-app-button">Let's Go!</button>
+        </section>`;
+
+        $("#container").html(homepageTemplate);
     });
 }
 
@@ -319,15 +343,18 @@ function renderExerciseInfo(data) {
     }
 
     let exerciseInfoTemplate = `
-            <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
-            <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
-            <h2>${data.name}</h2>
-            <p>${data.description}</p>
-            <section class="exercise-images"></section>
-            ${equipmentTemplate}
-            ${primaryMuscleTemplate}
-            ${secondaryMuscleTemplate}
-            `;
+    <nav class="exercise-info-page-nav">
+        <button class="back-to-homepage-button">Back to Homepage</button>
+        <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
+        <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
+    </nav>
+        <h2 class="exercise-name-h2">${data.name}</h2>
+        <h3 class="exercise-description"><span class="h3-span">Description</span></h3> ${data.description}
+        <div class="exercise-images"></div>
+        <h3 class="exercise-equipment"><span class="h3-span">Equipment</span></h3> ${equipmentTemplate}
+        <h3 class="primary-muscle"><span class="h3-span">Primary Target Muscle(s)</span></h3> ${primaryMuscleTemplate}</span>
+        <h3 class="secondary-muscle"><span class="h3-span">Secondary Target Muscle(s)</span></h3> ${secondaryMuscleTemplate}
+        `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
 
@@ -357,15 +384,17 @@ function renderExerciseComments(data) {
     $(".exercise-comments").append(exerciseCommentsTemplate);
 }
 
-function exerciseInfoLinkClickHandler() {
+function exerciseInfoLinkClickHandler(data) {
     $("#container").on("click", ".exercise-link", function(event) {
         event.preventDefault();
 
         let exercisePageTemplate = `
-        <section class="exercise-info"></section>
-        <section class="exercise-diagrams"></section>
-        <section class="exercise-comments"></section>
-        <section class="exercise-videos"></section>
+        <section class=exercise-info-page>
+            <section class="exercise-info"></section>
+            <section class="exercise-diagrams"></section>
+            <section class="exercise-comments"><h3><span class="h3-span">Additonal Comments (if any): </span></h3></section>
+            <section class="exercise-videos"><h3 class="exercise-videos-h3"><span class="h3-span">Instructional Videos</span></h3></section>
+        </section>
         `;
 
         $("#container").html(exercisePageTemplate);
@@ -383,6 +412,7 @@ function exerciseInfoLinkClickHandler() {
 
 function handleSubmitButtons() {
     startPageSubmitButton();
+    backToHomepageButton();
     muscleCategoryPageSubmitButtons();
     backToMuscleCategoryButton();
     backToExerciseListButton();
