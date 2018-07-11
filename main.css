@@ -33,7 +33,7 @@ h1 {
 }
 
 h2 {
-    color: #FFF;
+    color: #0064C2;
     font-size: 30px;
     text-align: center;
     font-family: 'Boogaloo', cursive;
@@ -52,7 +52,7 @@ h2 {
     font-size: 60px;
     color: #FFA825;
     margin-top: 30px;
-    text-shadow: 2px 2px #0074E1;
+    text-shadow: 2px 2px #0064C2;
     padding-top: 30px;
     margin-top: 0;
 }
@@ -61,7 +61,7 @@ h2 {
     color: #FFA825;
     font-size: 40px;
     margin-top: 200px;
-    text-shadow: 2px 2px #0074E1;
+    text-shadow: 2px 2px #0064C2;
 }
 
 .initialize-app-button {
@@ -74,7 +74,7 @@ h2 {
     border: none;
     font-size: 40px;
     margin-top: 15%;
-    color: #0074E1;
+    color: #0064C2;
 }
 
 .initialize-app-button:hover {
@@ -87,7 +87,7 @@ h2 {
 
 .muscle-category-h2 {
     font-size: 70px;
-    text-shadow: 2px 2px #1B9CE5;
+    text-shadow: 2px 2px #FFF;
     margin: 0;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -114,6 +114,11 @@ h2 {
     outline: none;
 }
 
+.hide-text {
+    position: absolute;
+    left: -99999px;
+}
+
 .muscle-category-button-template-div {
     text-align: center;
 }
@@ -122,17 +127,6 @@ h2 {
     display: none;
     position: absolute;
     text-align: center;
-}
-
-.muscle-category-button span {
-    -webkit-transition: 0.6s;
-    -moz-transition: 0.6s;
-    -o-transition: 0.6s;
-    transition: 0.6s;
-    -webkit-transition-delay: 0.05s;
-    -moz-transition-delay: 0.05s;
-    -o-transition-delay: 0.05s;
-    transition-delay: 0.05s;
 }
 
 .muscle-category-button:before,
@@ -151,8 +145,6 @@ h2 {
     line-height: 5.5;
 }
 
-/* :before */
-
 .muscle-category-button:before {
     content: attr(data-hover);
     -webkit-transform: translate(-150%,0);
@@ -161,8 +153,6 @@ h2 {
     -o-transform: translate(-150%,0);
     transform: translate(-150%,0);
 }
-
-/* :after */
 
 .muscle-category-button:after {
     content: attr(data-active);
@@ -173,8 +163,6 @@ h2 {
     transform: translate(150%,0);
 }
 
-/* Span on :hover and :active */
-
 .muscle-category-button:hover span,
 .muscle-category-button:active span {
     opacity: 0;
@@ -184,11 +172,6 @@ h2 {
     -o-transform: scale(0.3);
     transform: scale(0.3);
 }
-
-/*  
-    We show :before pseudo-element on :hover 
-    and :after pseudo-element on :active 
-*/
 
 .muscle-category-button:hover:before,
 .muscle-category-button:active:after {
@@ -203,10 +186,6 @@ h2 {
     -o-transition-delay: .2s;
     transition-delay: .2s;
 }
-
-/* 
-  We hide :before pseudo-element on :active
-*/
 
 .muscle-category-button:active:before {
     -webkit-transform: translate(-150%,0);
@@ -225,12 +204,12 @@ h2 {
 }
 
 .muscle-category-page-nav {
-    background-color: #FFA825;
+    background-color: #0064C2;
 }
 
 .back-to-muscle-category-page-button {
     font-family: 'Boogaloo', cursive;
-    font-size: 15px;
+    font-size: 18px;
     display: inline-block;
     background-color: transparent;
     border: none;
@@ -238,37 +217,37 @@ h2 {
     overflow: hidden;
     outline: none;
     padding: 12px;
-    color: #0074E1;
+    color: #01FEFF;
     
 }
 
 .back-to-muscle-category-page-button:hover {
-    color: #FFF;
-    background-color: #0074E1;
+    color: #0074E1;
+    background-color: #FFA825;
 }
 
 .back-to-homepage-button {
     font-family: 'Boogaloo', cursive;
-    font-size: 15px;
+    font-size: 18px;
     display: inline-block;
     background-color: transparent;
     border: none;
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    color: #0074E1;
+    color: #01FEFF;
     padding: 12px;
 }
 
 .back-to-homepage-button:hover {
-    color: #FFF;
-    background-color: #0074E1;
+    color: #0074E1;
+    background-color: #FFA825;
 }
 
-.recommended-exercises {
-    color: #FFF;
+.recommended-exercises-h2 {
+    color: #0064C2;
     font-size: 70px;
-    text-shadow: 2px 2px #1B9CE5;
+    text-shadow: 2px 2px #FFF;
     text-align: center;
     margin: 0;
     padding-top: 20px
@@ -276,10 +255,10 @@ h2 {
 
 .exercise-link-h3 {
     font-family: 'Boogaloo', cursive;
-    color: #FFF;
+    color: #0064C2;
     font-size: 50px;
     text-align: center;
-    text-shadow: 2px 2px #1B9CE5;
+    text-shadow: 2px 2px #FFF;
 }
 
 ul {
@@ -295,16 +274,19 @@ ul {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    max-width: 50%;
 }
 
 a:link {
     font-family: 'Boogaloo', cursive;
     text-decoration: none;
-    color: #0074E1;
+    color: #0064C2;
+    transition: transform 0.2s;
 }
 
 a:hover {
     color: #FFA825;
+    transform: scale(1.5);
 }
 
 .exercise-info-page {
@@ -312,12 +294,12 @@ a:hover {
 }
 
 .exercise-info-page-nav {
-    background-color: #FFA825;
+    background-color: #0064C2;
 }
 
 .back-to-exercise-list-page-button {
     font-family: 'Boogaloo', cursive;
-    font-size: 15px;
+    font-size: 18px;
     display: inline-block;
     background-color: transparent;
     border: none;
@@ -325,18 +307,18 @@ a:hover {
     overflow: hidden;
     outline: none;
     padding: 12px;
-    color: #0074E1;
+    color: #01FEFF;
 }
 
 .back-to-exercise-list-page-button:hover {
-    color: #FFF;
-    background-color: #0074E1;
+    color: #0074E1;
+    background-color: #FFA825;
 }
 
 .exercise-name-h2 {
-    color: #FFF;
+    color: #0064C2;
     font-size: 70px;
-    text-shadow: 2px 2px #1B9CE5;
+    text-shadow: 2px 2px #FFF;
     text-align: center;
     margin: 0;
     padding-top: 20px
@@ -344,10 +326,9 @@ a:hover {
 
 p {
     font-family: 'Boogaloo', cursive;
-    color: #FFF;
+    color: #0064C2;
     font-size: 35px;
     text-align: center;
-    text-shadow: 2px 2px #1B9CE5;
     margin-top: 80px;
 }
 
@@ -366,8 +347,7 @@ p {
 .h3-span {
     font-family: 'Boogaloo', cursive;
     color: #FFF;
-    text-shadow: 2px 2px #1B9CE5;
-    background-color: #FFA825;
+    background-color: #0064C2;
     border-radius: 50%;
     padding: 40px;
     text-align: center;
@@ -380,16 +360,51 @@ p {
     margin: 20px;
 }
 
+.equipment-span {
+    padding: 20px;
+
+}
+
+.col-6 {
+    width: 48%;
+    display: inline-block;
+}
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.center-justify-content-flex {
+    display: flex;
+    justify-content: center;
+}
+
+.exercise-diagrams {
+    text-align: center;
+}
+
 .anterior-diagram {
-height: 300px;
-background-repeat: no-repeat;
-background-size: 150px;
+    margin-right: 265px;
+    margin-left: 265px;
+    display: inline-block;
+    width: 200px;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: 200px;
 }
 
 .posterior-diagram {
-height: 300px;
-background-repeat: no-repeat;
-background-size: 150px;
+    margin-right: 265px;
+    margin-left: 265px;
+    display: inline-block;
+    width: 200px;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: 200px;
 }
 
 .exercise-videos-h3 {
@@ -397,7 +412,231 @@ background-size: 150px;
 }
 
 iframe {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
+    background-color: #FFA825;
+    margin: 20px;
 }
+
+@media only screen and (max-width: 321px) {
+    .insaiyan-physique {
+        font-size: 20px;
+    }
+
+    .start-page-h2 {
+        font-size: 22px;
+        margin-top: 80px;
+    }
+
+    .initialize-app-button {
+        font-size: 20px;
+        margin-top: 18%;
+        padding: 20px;
+    }
+
+    .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
+        font-size: 10px;
+    }
+
+    .muscle-category-h2 {
+        font-size: 30px;
+        text-shadow: 2px 2px #FFF;
+        margin: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .muscle-category-button {
+        display: inline-block;
+        margin: 15px;
+        height: 175px;
+        width: 175px;
+        background-position-x: 50%;
+        border: none;
+        color: #01FEFF;
+        text-shadow: 2px 2px #0074E1;
+        font-size: 25px;
+        
+    }
+
+    .muscle-category-button:before,
+    .muscle-category-button:after {
+    opacity: 1;
+    position: static;
+    line-height: normal;
+}
+
+    .recommended-exercises-h2 {
+        font-size: 30px;
+    }
+
+    .exercise-link-h3 {
+        font-size: 25px;
+        padding: 10px;
+    }
+
+    .exercise-info-page-nav, .muscle-category-page-nav {
+        text-align: center;
+    }
+
+    .exercise-link {
+        font-size: 20px;
+    }
+
+    .exercise-name-h2 {
+        font-size: 35px;
+    }
+
+    .exercise-description, .exercise-equipment, .primary-muscle, .secondary-muscle, .exercise-comments, .exercise-videos {
+        margin-top: 100px;
+    }
+
+    .h3-span {
+        padding: 25px;
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 20px;
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .exercise-images {
+        margin-top: 50px;
+    }
+
+    .images {
+        height: 100px;
+    }
+
+    .col-6 {
+        width: 100%;
+        display: block;
+    }
+
+    .exercise-videos {
+        height: 100%
+    }
+
+    iframe {
+        display: block;
+        width: 280px;
+        height: 200px;
+    }
+
+}
+
+@media only screen and (min-width: 322px) and (max-width: 376px) {
+    .insaiyan-physique {
+        font-size: 20px;
+    }
+
+    .start-page-h2 {
+        font-size: 22px;
+        margin-top: 80px;
+    }
+
+    .initialize-app-button {
+        font-size: 20px;
+        margin-top: 18%;
+        padding: 20px;
+    }
+
+    .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
+        font-size: 10px;
+    }
+
+    .muscle-category-h2 {
+        font-size: 30px;
+        text-shadow: 2px 2px #FFF;
+        margin: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .muscle-category-button {
+        display: inline-block;
+        margin: 15px;
+        height: 175px;
+        width: 175px;
+        background-position-x: 50%;
+        border: none;
+        color: #01FEFF;
+        text-shadow: 2px 2px #0074E1;
+        font-size: 25px;
+        
+    }
+
+    .muscle-category-button:before,
+    .muscle-category-button:after {
+    opacity: 1;
+    position: static;
+    line-height: normal;
+}
+
+    .recommended-exercises-h2 {
+        font-size: 30px;
+    }
+
+    .exercise-link-h3 {
+        font-size: 25px;
+        padding: 10px;
+    }
+
+    .exercise-info-page-nav, .muscle-category-page-nav {
+        text-align: center;
+    }
+
+    .exercise-link {
+        font-size: 20px;
+    }
+
+    .exercise-name-h2 {
+        font-size: 35px;
+    }
+
+    .exercise-description, .exercise-equipment, .primary-muscle, .secondary-muscle, .exercise-comments, .exercise-videos {
+        margin-top: 100px;
+    }
+
+    .h3-span {
+        padding: 25px;
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 20px;
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .exercise-images {
+        margin-top: 50px;
+    }
+
+    .images {
+        height: 100px;
+    }
+
+    .col-6 {
+        width: 100%;
+        display: block;
+    }
+
+    .exercise-videos {
+        height: 100%
+    }
+
+    iframe {
+        width: 330px;
+        height: 220px;
+    }
+
+}
+
+@media only screen and (min-width: 377px) and (max-width: 425px) {
+    
+}
+
 

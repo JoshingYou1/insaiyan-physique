@@ -34,6 +34,7 @@ var youtubePlayerArray = [];
 function onYouTubeIframeAPIReady() {
     youtubePlayerArray.forEach(function(video) {
         createYTPlayer(video);
+        $(`#${video.id} .ytp-title-channel-name`).text("test");
     })
 }
 
@@ -200,7 +201,7 @@ function renderMuscleCategoryButtons(data) {
     let buttonTemplate = "";
     data.results.forEach(muscleCategory => {
         buttonTemplate += `<button style="background-image: url('Muscle_Category_Images/${MUSCLE_IMAGE_MAP[muscleCategory.id]}')" data-category-id="${muscleCategory.id}" 
-        data-category-name="${muscleCategory.name}" data-hover="${muscleCategory.name}" class="muscle-category-button"></button>
+        data-category-name="${muscleCategory.name}" data-hover="${muscleCategory.name}" class="muscle-category-button"><span class="hide-text">${muscleCategory.name}</span></button>
         `;
     });
     const muscleCategoryPage = `
@@ -241,7 +242,7 @@ function renderExercisesByMuscleCategory(data) {
         <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
     </nav>
     <section class="exercise-list-page">
-        <h2 class="recommended-exercises">Recommended Exercises for ${currentMuscleCategory}</h2>
+        <h2 class="recommended-exercises-h2">Recommended Exercises for ${currentMuscleCategory}</h2>
         <h3 class="exercise-link-h3">Choose any of the following exercises to access detailed information:</h3>
 
         <ul class="exercise-list">
@@ -295,9 +296,9 @@ function backToExerciseListButton() {
     });
 }
 
-function renderMuscleDiagrams(muscles) {
+function renderMuscleDiagrams(muscles, diagramOrientation) {
     let anteriorDiagramMusclesURLs = "";
-    //url(Muscle_Diagram_Images/muscle-14.svg)
+  
     let anteriorMuscles = muscles.filter(function(muscle) {
         return muscle.is_front;
     });
@@ -322,7 +323,13 @@ function renderMuscleDiagrams(muscles) {
     let posteriorDiagram = `<div class="posterior-diagram" style="background-image:${posteriorDiagramMusclesURLs}
             url(Muscle_Diagram_Images/muscular_system_back.svg);"></div>`
             
-    $(".exercise-diagrams").append(anteriorDiagram, posteriorDiagram);
+    if(diagramOrientation) {
+        $(".exercise-diagrams").append(anteriorDiagram, posteriorDiagram);
+    }
+
+    else {
+        $(".exercise-diagrams").append(posteriorDiagram, anteriorDiagram);
+    }
 }
 
 function renderExerciseInfo(data) {
@@ -331,7 +338,7 @@ function renderExerciseInfo(data) {
     let secondaryMuscleTemplate = "";
 
     for(let e of data.equipment) {
-        equipmentTemplate += `<p>${e.name}</p>`;
+        equipmentTemplate += `<span class="equipment-span">${e.name}</span>`;
     }
 
     for(let e of data.muscles) {
@@ -348,19 +355,37 @@ function renderExerciseInfo(data) {
         <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
         <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
     </nav>
-        <h2 class="exercise-name-h2">${data.name}</h2>
-        <h3 class="exercise-description"><span class="h3-span">Description</span></h3> ${data.description}
-        <div class="exercise-images"></div>
-        <h3 class="exercise-equipment"><span class="h3-span">Equipment</span></h3> ${equipmentTemplate}
-        <h3 class="primary-muscle"><span class="h3-span">Primary Target Muscle(s)</span></h3> ${primaryMuscleTemplate}</span>
-        <h3 class="secondary-muscle"><span class="h3-span">Secondary Target Muscle(s)</span></h3> ${secondaryMuscleTemplate}
-        `;
+
+    <h2 class="exercise-name-h2">${data.name}</h2>
+    <h3 class="exercise-description"><span class="h3-span">Description</span></h3> ${data.description}
+    <div class="exercise-images"></div>
+    <h3 class="exercise-equipment"><span class="h3-span">Equipment</span></h3>
+        <p>${equipmentTemplate}</p>
+    <div class="target-muscles row center-justify-content-flex">
+        <div class="col-6">
+            <h3 class="primary-muscle">
+                <span class="h3-span">Primary Target Muscle(s)</span>
+            </h3>                
+            ${primaryMuscleTemplate}
+
+        </div>
+        <div class="col-6">
+            <h3 class="secondary-muscle">
+                <span class="h3-span">Secondary Target Muscle(s)</span>
+            </h3>                
+            ${secondaryMuscleTemplate} 
+        </div>
+    </div>
+    `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
 
     let allMuscles = data.muscles.concat(data.muscles_secondary);
 
-    renderMuscleDiagrams(allMuscles);
+    let diagramOrientation = data.muscles[0].is_front;
+
+
+    renderMuscleDiagrams(allMuscles, diagramOrientation);
     retrieveExerciseImgFromApi(exerciseNumber, renderExerciseImages);
 }
 
@@ -368,7 +393,7 @@ function renderExerciseImages(data) {
     let exerciseImagesTemplate = "";
 
     for(let i = 0; i < data.results.length; i++) {
-        exerciseImagesTemplate += `<img class="images" src="${data.results[i].image}">`;
+        exerciseImagesTemplate += `<img alt="exercise-demonstration" class="images" src="${data.results[i].image}">`;
     }
 
     $(".exercise-images").append(exerciseImagesTemplate);
@@ -392,7 +417,7 @@ function exerciseInfoLinkClickHandler(data) {
         <section class=exercise-info-page>
             <section class="exercise-info"></section>
             <section class="exercise-diagrams"></section>
-            <section class="exercise-comments"><h3><span class="h3-span">Additonal Comments (if any): </span></h3></section>
+            <section class="exercise-comments"><h3 class="comments-h3"><span class="h3-span">Additonal Comments (if any): </span></h3></section>
             <section class="exercise-videos"><h3 class="exercise-videos-h3"><span class="h3-span">Instructional Videos</span></h3></section>
         </section>
         `;
