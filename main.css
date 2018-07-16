@@ -385,9 +385,10 @@ p {
 
 .exercise-diagrams {
     text-align: center;
+    display: block;
 }
 
-.anterior-diagram {
+.diagram {
     margin-right: 265px;
     margin-left: 265px;
     display: inline-block;
@@ -397,14 +398,8 @@ p {
     background-size: 200px;
 }
 
-.posterior-diagram {
-    margin-right: 265px;
-    margin-left: 265px;
-    display: inline-block;
-    width: 200px;
-    height: 400px;
-    background-repeat: no-repeat;
-    background-size: 200px;
+.mobile-viewports {
+    display: none;
 }
 
 .exercise-videos-h3 {
@@ -418,7 +413,7 @@ iframe {
     margin: 20px;
 }
 
-@media only screen and (max-width: 321px) {
+@media only screen and (max-width: 321.9px) {
     .insaiyan-physique {
         font-size: 20px;
     }
@@ -459,15 +454,14 @@ iframe {
         
     }
 
-    .muscle-category-button:before,
-    .muscle-category-button:after {
+    .muscle-category-button:before, .muscle-category-button:after {
     opacity: 1;
     position: static;
     line-height: normal;
-}
+    }
 
     .recommended-exercises-h2 {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .exercise-link-h3 {
@@ -481,6 +475,7 @@ iframe {
 
     .exercise-link {
         font-size: 20px;
+        max-width: 100%;
     }
 
     .exercise-name-h2 {
@@ -508,11 +503,29 @@ iframe {
 
     .images {
         height: 100px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 25px;
     }
 
     .col-6 {
         width: 100%;
         display: block;
+    }
+
+    .mobile-viewports {
+        display: block;
+    }
+
+    .exercise-diagrams {
+        display: none;
+    }
+
+    .diagram {
+        margin: 0 auto;
+        width: 150px;
+        height: 300px;
+        background-size: 150px
     }
 
     .exercise-videos {
@@ -527,7 +540,7 @@ iframe {
 
 }
 
-@media only screen and (min-width: 322px) and (max-width: 376px) {
+@media only screen and (min-width: 322px) and (max-width: 376.9px) {
     .insaiyan-physique {
         font-size: 20px;
     }
@@ -568,15 +581,14 @@ iframe {
         
     }
 
-    .muscle-category-button:before,
-    .muscle-category-button:after {
-    opacity: 1;
-    position: static;
-    line-height: normal;
-}
+    .muscle-category-button:before, .muscle-category-button:after {
+        opacity: 1;
+        position: static;
+        line-height: normal;
+    }
 
     .recommended-exercises-h2 {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .exercise-link-h3 {
@@ -590,6 +602,7 @@ iframe {
 
     .exercise-link {
         font-size: 20px;
+        max-width: 100%
     }
 
     .exercise-name-h2 {
@@ -617,11 +630,29 @@ iframe {
 
     .images {
         height: 100px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 25px;
     }
 
     .col-6 {
         width: 100%;
         display: block;
+    }
+
+    .mobile-viewports {
+        display: block;
+    }
+
+    .exercise-diagrams {
+        display: none;
+    }
+
+    .diagram {
+        margin: 0 auto;
+        width: 150px;
+        height: 300px;
+        background-size: 150px
     }
 
     .exercise-videos {
@@ -635,8 +666,616 @@ iframe {
 
 }
 
-@media only screen and (min-width: 377px) and (max-width: 425px) {
+@media only screen and (min-width: 377px) and (max-width: 426.9px) {
+    .insaiyan-physique {
+        font-size: 25px;
+        padding-top: 30px;
+    }
+
+    .start-page-h2 {
+        font-size: 24px;
+        margin-top: 60px
+    }
+
+    .initialize-app-button {
+        padding: 20px;
+        font-size: 20px;
+        margin-top: 10%;
+    }
+
+    .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
+        font-size: 12px;
+    }
+
+    .muscle-category-h2 {
+        font-size: 35px;
+        text-shadow: 2px 2px #FFF;
+        margin: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .muscle-category-button {
+        display: inline-block;
+        margin: 15px;
+        height: 175px;
+        width: 175px;
+        background-position-x: 50%;
+        border: none;
+        color: #01FEFF;
+        text-shadow: 2px 2px #0074E1;
+        font-size: 25px;
+        
+    }
+
+    .muscle-category-button:before, .muscle-category-button:after {
+        opacity: 1;
+        position: static;
+        line-height: normal;
+    }
+
+    .recommended-exercises-h2 {
+        font-size: 30px;
+    }
+
+    .exercise-link-h3 {
+        font-size: 30px;
+        padding: 10px;
+    }
+
+    .exercise-info-page-nav, .muscle-category-page-nav {
+        text-align: center;
+    }
+
+    .exercise-link {
+        font-size: 25px;
+        max-width: 100%;
+    }
+
+    .exercise-name-h2 {
+        font-size: 40px;
+    }
+
+    .exercise-description, .exercise-equipment, .primary-muscle, .secondary-muscle, .exercise-comments, .exercise-videos {
+        margin-top: 100px;
+    }
+
+    .h3-span {
+        padding: 25px;
+        font-size: 30px;
+    }
+
+    p {
+        font-size: 22px;
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .exercise-images {
+        margin-top: 50px;
+    }
+
+    .images {
+        height: 120px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
     
+    .col-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .mobile-viewports {
+        display: block;
+    }
+
+    .exercise-diagrams {
+        display: none;
+    }
+
+    .diagram {
+        margin: 0 auto;
+        width: 150px;
+        height: 300px;
+        background-size: 150px
+    }
+
+    .exercise-videos {
+        height: 100%
+    }
+
+    iframe {
+        width: 340px;
+        height: 230px;
+        margin: 15px;
+    }
+
 }
 
+@media only screen and (min-width: 427px) and (max-width: 599.9px) {
+    .insaiyan-physique {
+        font-size: 30px;
+        padding-top: 30px;
+    }
+
+    .start-page-h2 {
+        font-size: 26px;
+        margin-top: 60px
+    }
+
+    .initialize-app-button {
+        padding: 25px;
+        font-size: 25px;
+        margin-top: 10%;
+    }
+
+    .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
+        font-size: 14px;
+    }
+
+    .muscle-category-h2 {
+        font-size: 40px;
+        text-shadow: 2px 2px #FFF;
+        margin: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .muscle-category-button {
+        display: inline-block;
+        margin: 15px;
+        height: 175px;
+        width: 175px;
+        background-position-x: 50%;
+        border: none;
+        color: #01FEFF;
+        text-shadow: 2px 2px #0074E1;
+        font-size: 30px;
+        
+    }
+
+    .muscle-category-button:before, .muscle-category-button:after {
+        opacity: 1;
+        position: static;
+        line-height: normal;
+    }
+
+    .recommended-exercises-h2 {
+        font-size: 35px;
+    }
+
+    .exercise-link-h3 {
+        font-size: 35px;
+        padding: 10px;
+    }
+
+    .exercise-info-page-nav, .muscle-category-page-nav {
+        text-align: center;
+    }
+
+    .exercise-link {
+        font-size: 30px;
+        max-width: 100%;
+    }
+
+    .exercise-name-h2 {
+        font-size: 40px;
+    }
+
+    .exercise-description, .exercise-equipment, .primary-muscle, .secondary-muscle, .exercise-comments, .exercise-videos {
+        margin-top: 100px;
+    }
+
+    .h3-span {
+        padding: 25px;
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 24px;
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .exercise-images {
+        margin-top: 50px;
+    }
+
+    .images {
+        height: 140px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
+    
+    .col-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .mobile-viewports {
+        display: block;
+    }
+
+    .exercise-diagrams {
+        display: none;
+    }
+
+    .diagram {
+        margin: 0 auto;
+        width: 150px;
+        height: 300px;
+        background-size: 150px
+    }
+
+    .exercise-videos {
+        height: 100%
+    }
+
+    iframe {
+        width: 380px;
+        height: 260px;
+        margin: 15px;
+    }
+}
+        
+@media only screen and (min-width: 600px) and (max-width: 768.9px) {
+    .insaiyan-physique {
+        font-size: 35px;
+        padding-top: 30px;
+    }
+
+    .start-page-h2 {
+        font-size: 28px;
+        margin-top: 60px
+    }
+
+    .initialize-app-button {
+        padding: 25px;
+        font-size: 25px;
+        margin-top: 8%;
+    }
+
+    .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
+        font-size: 16px;
+    }
+
+    .muscle-category-h2 {
+        font-size: 45px;
+        text-shadow: 2px 2px #FFF;
+        margin: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .muscle-category-button {
+        display: inline-block;
+        margin: 15px;
+        height: 175px;
+        width: 175px;
+        background-position-x: 50%;
+        border: none;
+        color: #01FEFF;
+        text-shadow: 2px 2px #0074E1;
+        font-size: 30px;
+        
+    }
+
+    .muscle-category-button:before, .muscle-category-button:after {
+        opacity: 1;
+        position: static;
+        line-height: normal;
+    }
+
+    .recommended-exercises-h2 {
+        font-size: 45px;
+    }
+
+    .exercise-link-h3 {
+        font-size: 45px;
+        padding: 10px;
+    }
+
+    .exercise-link {
+        font-size: 35px;
+        max-width: 100%;
+    }
+
+    .exercise-name-h2 {
+        font-size: 50px;
+    }
+
+    .exercise-description, .exercise-equipment, .primary-muscle, .secondary-muscle, .exercise-comments, .exercise-videos {
+        margin-top: 100px;
+    }
+
+    .h3-span {
+        padding: 30px;
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 26px;
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .exercise-images {
+        margin-top: 50px;
+    }
+
+    .images {
+        height: 180px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
+    
+    .col-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .mobile-viewports {
+        display: block;
+    }
+
+    .exercise-diagrams {
+        display: none;
+    }
+
+    .diagram {
+        margin: 0 auto;
+        width: 150px;
+        height: 300px;
+        background-size: 150px
+    }
+
+    .exercise-videos {
+        height: 100%
+    }
+
+    iframe {
+        width: 600px;
+        height: 340px;
+        margin: 15px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024.9px) {
+    .insaiyan-physique {
+        font-size: 50px;
+        padding-top: 20px;
+    }
+
+    .start-page-h2 {
+        font-size: 30px;
+        margin-top: 60px
+    }
+
+    .initialize-app-button {
+        padding: 30px;
+        font-size: 30px;
+        margin-top: 10%;
+    }
+
+    .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
+        font-size: 16px;
+    }
+
+    .muscle-category-h2 {
+        font-size: 45px;
+        text-shadow: 2px 2px #FFF;
+        margin: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .muscle-category-button {
+        display: inline-block;
+        margin: 15px;
+        height: 250px;
+        width: 250px;
+        background-position-x: 50%;
+        border: none;
+        color: #01FEFF;
+        text-shadow: 2px 2px #0074E1;
+        font-size: 35px;
+        
+    }
+
+    .muscle-category-button:before, .muscle-category-button:after {
+        opacity: 1;
+        position: static;
+        line-height: normal;
+    }
+
+    .recommended-exercises-h2 {
+        font-size: 50px;
+    }
+
+    .exercise-link-h3 {
+        font-size: 45px;
+        padding: 10px;
+    }
+
+    .exercise-link {
+        font-size: 40px;
+        max-width: 100%;
+    }
+
+    .exercise-name-h2 {
+        font-size: 50px;
+    }
+
+    .exercise-description, .exercise-equipment, .primary-muscle, .secondary-muscle, .exercise-comments, .exercise-videos {
+        margin-top: 100px;
+    }
+
+    .h3-span {
+        padding: 25px;
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 28px;
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .exercise-images {
+        margin-top: 50px;
+    }
+
+    .images {
+        height: 140px;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
+    
+    .col-6 {
+        width: 50%;
+        text-align: center;
+    }
+
+    .mobile-viewports {
+        display: none;
+    }
+
+    .diagram {
+        margin-left: 15%;
+        margin-right: 15%;
+        width: 150px;
+        height: 300px;
+        background-size: 150px
+
+    }
+
+    .exercise-videos {
+        height: 100%
+    }
+
+    iframe {
+        width: 660px;
+        height: 380px;
+        margin: 15px;
+    }
+
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1440.9px) {
+    .insaiyan-physique {
+        font-size: 55px;
+        padding-top: 30px;
+    }
+
+    .start-page-h2 {
+        font-size: 35px;
+        margin-top: 60px
+    }
+
+    .initialize-app-button {
+        padding: 35px;
+        font-size: 35px;
+        margin-top: 10%;
+    }
+
+    .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
+        font-size: 16px;
+    }
+
+    .muscle-category-h2 {
+        font-size: 50px;
+        text-shadow: 2px 2px #FFF;
+        margin: 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .muscle-category-button {
+        display: inline-block;
+        margin: 15px;
+        height: 300px;
+        width: 300px;
+        background-position-x: 50%;
+        border: none;
+        color: #01FEFF;
+        text-shadow: 2px 2px #0074E1;
+        font-size: 40px;
+        
+    }
+
+    .recommended-exercises-h2 {
+        font-size: 60px;
+    }
+
+    .exercise-link-h3 {
+        font-size: 50px;
+        padding: 10px;
+    }
+
+    .exercise-link {
+        font-size: 45px;
+        max-width: 100%;
+    }
+
+    .exercise-name-h2 {
+        font-size: 60px;
+    }
+
+    .exercise-description, .exercise-equipment, .primary-muscle, .secondary-muscle, .exercise-comments, .exercise-videos {
+        margin-top: 100px;
+    }
+
+    .h3-span {
+        padding: 35px;
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 30px;
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .exercise-images {
+        margin-top: 50px;
+    }
+
+    .images {
+        height: 200px;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
+    
+    .col-6 {
+        width: 50%;
+        text-align: center;
+    }
+
+    .mobile-viewports {
+        display: none;
+    }
+
+    .diagram {
+        margin-left: 15%;
+        margin-right: 15%;
+        width: 200px;
+        height: 400px;
+        background-size: 200px
+
+    }
+
+    .exercise-videos {
+        height: 100%
+    }
+
+    iframe {
+        width: 480px;
+        height: 300px;
+        margin: 15px;
+    }
+}
 

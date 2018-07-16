@@ -1,7 +1,7 @@
 "use strict";
 
-const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
-// console.log(process.env.YOUTUBE_KEY);
+const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
+
 function retrieveInstructionalVideosFromApi(exerciseName, callback) {
     const settings = {
         url: YOUTUBE_SEARCH_URL,
@@ -20,7 +20,6 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
 }
 
 function createYTPlayer(YTPlayerInfo) {
-    console.log(YTPlayerInfo);
     return new YT.Player(YTPlayerInfo.id, {
         height: '390',
         width: '640',
@@ -134,7 +133,6 @@ function retrieveMuscleCategoryFromApi(callback) {
 }
 
 function retrieveExerciseImgFromApi(exerciseId, callback) {
-    console.log("exercise:", exerciseId);
     const settings = {
         url: WORKOUT_URLS.exerciseimage,
         data: {
@@ -179,9 +177,7 @@ function retrieveMuscleInfoFromApi(exerciseId, callback) {
     $.ajax(settings);
 }
 
-/*function debug(data) {
-    console.log(data);
-}*/
+
 
 var currentMuscleCategory = "";
 
@@ -296,7 +292,22 @@ function backToExerciseListButton() {
     });
 }
 
-function renderMuscleDiagrams(muscles, diagramOrientation) {
+function renderMuscleDiagram(muscles, diagramOrientation) {
+    let diagramMusclesURLs = "";
+
+    let imageName = diagramOrientation ? `muscular_system_front.svg` : `muscular_system_back.svg`;
+
+
+    muscles.forEach(function(muscle) {
+        diagramMusclesURLs += `url(Muscle_Diagram_Images/muscle-${muscle.id}.svg), `
+    });
+
+    return `<div class="diagram mobile-viewports" style="background-image:${diagramMusclesURLs}
+        url(Muscle_Diagram_Images/${imageName});"></div>`;
+            
+}
+
+function renderAllMuscleDiagrams(muscles, diagramOrientation) {
     let anteriorDiagramMusclesURLs = "";
   
     let anteriorMuscles = muscles.filter(function(muscle) {
@@ -311,7 +322,7 @@ function renderMuscleDiagrams(muscles, diagramOrientation) {
         anteriorDiagramMusclesURLs += `url(Muscle_Diagram_Images/muscle-${muscle.id}.svg), `
     });
 
-    let anteriorDiagram = `<div class="anterior-diagram" style="background-image:${anteriorDiagramMusclesURLs}
+    let anteriorDiagram = `<div class="diagram" style="background-image:${anteriorDiagramMusclesURLs}
         url(Muscle_Diagram_Images/muscular_system_front.svg);"></div>`
 
     let posteriorDiagramMusclesURLs = "";
@@ -320,7 +331,7 @@ function renderMuscleDiagrams(muscles, diagramOrientation) {
         posteriorDiagramMusclesURLs += `url(Muscle_Diagram_Images/muscle-${muscle.id}.svg), `
     });
 
-    let posteriorDiagram = `<div class="posterior-diagram" style="background-image:${posteriorDiagramMusclesURLs}
+    let posteriorDiagram = `<div class="diagram" style="background-image:${posteriorDiagramMusclesURLs}
             url(Muscle_Diagram_Images/muscular_system_back.svg);"></div>`
             
     if(diagramOrientation) {
@@ -349,6 +360,10 @@ function renderExerciseInfo(data) {
         secondaryMuscleTemplate += `<p>${e.name}</p>`
     }
 
+    let primaryMuscleDiagram = renderMuscleDiagram(data.muscles, data.muscles[0].is_front);
+
+    let secondaryMuscleDiagram = renderMuscleDiagram(data.muscles_secondary, data.muscles_secondary[0].is_front);
+
     let exerciseInfoTemplate = `
     <nav class="exercise-info-page-nav">
         <button class="back-to-homepage-button">Back to Homepage</button>
@@ -367,25 +382,25 @@ function renderExerciseInfo(data) {
                 <span class="h3-span">Primary Target Muscle(s)</span>
             </h3>                
             ${primaryMuscleTemplate}
-
+            ${primaryMuscleDiagram}
         </div>
         <div class="col-6">
             <h3 class="secondary-muscle">
                 <span class="h3-span">Secondary Target Muscle(s)</span>
             </h3>                
-            ${secondaryMuscleTemplate} 
-        </div>
+            ${secondaryMuscleTemplate}
+            ${secondaryMuscleDiagram}
     </div>
     `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
-
     let allMuscles = data.muscles.concat(data.muscles_secondary);
 
     let diagramOrientation = data.muscles[0].is_front;
 
+// renders diagrams in larger viewports
+    renderAllMuscleDiagrams(allMuscles, diagramOrientation);
 
-    renderMuscleDiagrams(allMuscles, diagramOrientation);
     retrieveExerciseImgFromApi(exerciseNumber, renderExerciseImages);
 }
 
