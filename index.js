@@ -186,7 +186,7 @@ var exerciseNumber = 0;
 const MUSCLE_IMAGE_MAP = {
     8: "arms.jpg",
     9: "legs.webp",
-    10: "PUMP-abs.jpg",
+    10: "abs-1.jpg",
     11: "chest.webp",
     12: "back.jpg",
     13: "shoulders.jpg",
