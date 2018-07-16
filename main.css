@@ -112,6 +112,7 @@ h2 {
     overflow: hidden;
     text-decoration: none;
     outline: none;
+    cursor: pointer;
 }
 
 .hide-text {
