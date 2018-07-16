@@ -28,6 +28,7 @@ function createYTPlayer(YTPlayerInfo) {
     });
 }
 
+// Created global variable in order to store off video data for the YouTube ifram API
 var youtubePlayerArray = [];
 
 function onYouTubeIframeAPIReady() {
@@ -178,9 +179,11 @@ function retrieveMuscleInfoFromApi(exerciseId, callback) {
 }
 
 
-
+// Created global variable to state which muscle category was chosen because it gets lost when an exercise is chosen and the user wants to
+//go back to the exercise list page
 var currentMuscleCategory = "";
 
+// Created another global variable because the exercise number could not be retrieved when the user moved forward into the exercise info page
 var exerciseNumber = 0;
 
 const MUSCLE_IMAGE_MAP = {

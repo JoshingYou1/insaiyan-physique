@@ -10,5 +10,4 @@ This workout application allows the user to choose exercises based on specific m
 
 HTML/CSS/JavaScript/JQuery
 
-## Additional Info:
 
