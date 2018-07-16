@@ -184,13 +184,13 @@ var currentMuscleCategory = "";
 var exerciseNumber = 0;
 
 const MUSCLE_IMAGE_MAP = {
-    8: "arms.jpg",
-    9: "legs.webp",
+    8: "arms-1.jpg",
+    9: "legs-1.webp",
     10: "abs-1.jpg",
     11: "chest.webp",
-    12: "back.jpg",
-    13: "shoulders.jpg",
-    14: "calves.png"
+    12: "back-1.jpg",
+    13: "shoulders-1.jpg",
+    14: "calves-1.png"
 }
 
 function renderMuscleCategoryButtons(data) {
