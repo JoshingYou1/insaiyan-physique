@@ -2,6 +2,7 @@
 
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
 
+//Retrieves video data from YouTube API
 function retrieveInstructionalVideosFromApi(exerciseName, callback) {
     const settings = {
         url: YOUTUBE_SEARCH_URL,
@@ -19,6 +20,7 @@ function retrieveInstructionalVideosFromApi(exerciseName, callback) {
     $.ajax(settings);
 }
 
+//Creates a YouTube player on the webpage
 function createYTPlayer(YTPlayerInfo) {
     return new YT.Player(YTPlayerInfo.id, {
         height: '390',
@@ -31,6 +33,7 @@ function createYTPlayer(YTPlayerInfo) {
 // Created global variable in order to store off video data for the YouTube ifram API
 var youtubePlayerArray = [];
 
+//Initiates the YouTube iframe API in order to allow the user to click and play each video from the webpage
 function onYouTubeIframeAPIReady() {
     youtubePlayerArray.forEach(function(video) {
         createYTPlayer(video);
@@ -38,6 +41,7 @@ function onYouTubeIframeAPIReady() {
     })
 }
 
+//Renders the YouTube videos to the webpage
 function renderExerciseVideos(data) {
     let exerciseVideoTemplate = "";
 
@@ -68,7 +72,7 @@ const WORKOUT_URLS = {
     muscle: WORKOUT_BASE_URL + "muscle"
 }
 
-
+//Retrieves each individual exercise from the wger API based on each muscle category
 function retrieveExercisesByCategoryIdFromApi(categoryId, callback) {
     const settings = {
         url: WORKOUT_URLS.exercise,
@@ -85,6 +89,7 @@ function retrieveExercisesByCategoryIdFromApi(categoryId, callback) {
     $.ajax(settings);
 }
 
+//Retrieves the information for each exercise from the wger API
 function retrieveExerciseInfoFromApi(exerciseId, callback) {
     const settings = {
         url: WORKOUT_URLS.exerciseinfo + "/" + exerciseId,
@@ -101,7 +106,7 @@ function retrieveExerciseInfoFromApi(exerciseId, callback) {
     $.ajax(settings);
 }
 
-
+//Retrieves the equipment information for each exercise from the wger API
 function retrieveEquipmentFromApi(exerciseId, callback) {
     const settings = {
         url: WORKOUT_URLS.equipment,
@@ -118,6 +123,7 @@ function retrieveEquipmentFromApi(exerciseId, callback) {
     $.ajax(settings);
 }
 
+//Retrieves the different muscle categories from the wger API
 function retrieveMuscleCategoryFromApi(callback) {
     const settings = {
         url: WORKOUT_URLS.exercisecategory,
@@ -133,6 +139,7 @@ function retrieveMuscleCategoryFromApi(callback) {
     $.ajax(settings);
 }
 
+//Retrieves the exercise images for each exercise from the wger API
 function retrieveExerciseImgFromApi(exerciseId, callback) {
     const settings = {
         url: WORKOUT_URLS.exerciseimage,
@@ -147,6 +154,7 @@ function retrieveExerciseImgFromApi(exerciseId, callback) {
     $.ajax(settings);
 }
 
+//Retrieves the comments for each exercise from the wger API
 function retrieveExerciseCommentsFromApi(exerciseId, callback) {
     const settings = {
         url: WORKOUT_URLS.exercisecomment,
@@ -163,6 +171,7 @@ function retrieveExerciseCommentsFromApi(exerciseId, callback) {
     $.ajax(settings);
 }
 
+//Retrieves the target muscles for each exercise from the wger API
 function retrieveMuscleInfoFromApi(exerciseId, callback) {
     const settings = {
         url: WORKOUT_URLS.muscle,
@@ -186,6 +195,7 @@ var currentMuscleCategory = "";
 // Created another global variable because the exercise number could not be retrieved when the user moved forward into the exercise info page
 var exerciseNumber = 0;
 
+//constant to map each muscle category button image
 const MUSCLE_IMAGE_MAP = {
     8: "arms-1.jpg",
     9: "legs-1.webp",
@@ -196,6 +206,7 @@ const MUSCLE_IMAGE_MAP = {
     14: "calves-1.png"
 }
 
+//Renders the buttons corresponding to each muscle category as well as the muscle category page of the application
 function renderMuscleCategoryButtons(data) {
     let buttonTemplate = "";
     data.results.forEach(muscleCategory => {
@@ -219,6 +230,7 @@ function renderMuscleCategoryButtons(data) {
     $("#container").html(muscleCategoryPage);
 }
 
+//Creates the button that takes the user into the main application content
 function startPageSubmitButton() {
     $("#container").on("click", ".initialize-app-button", function(event) {
         event.preventDefault();
@@ -228,6 +240,7 @@ function startPageSubmitButton() {
 
 }
 
+//Renders a list of exercises for each muscle category as well as the exercise list page of the application
 function renderExercisesByMuscleCategory(data) {
     let listTemplate = "";
     data.results.forEach(exercise => {
@@ -253,6 +266,7 @@ function renderExercisesByMuscleCategory(data) {
     $("#container").html(exerciseListPage);
 }
 
+//Takes the user to the exercise list page for whichever muscle category is selected
 function muscleCategoryPageSubmitButtons() {
     $("#container").on("click", ".muscle-category-button", function(event) {
         event.preventDefault();
@@ -264,6 +278,7 @@ function muscleCategoryPageSubmitButtons() {
     });
 }
 
+//Takes the user back to the homepage when the "Back to Homepage" button is selected
 function backToHomepageButton() {
     $("#container").on("click", ".back-to-homepage-button", function(event) {
         event.preventDefault();
@@ -279,6 +294,7 @@ function backToHomepageButton() {
     });
 }
 
+//Takes the user back to the muscle category page when the "Back to Muscle Category Page" button is selected
 function backToMuscleCategoryButton() {
     $("#container").on("click", ".back-to-muscle-category-page-button", function(event) {
         event.preventDefault();
@@ -287,6 +303,7 @@ function backToMuscleCategoryButton() {
     });
 }
 
+//Takes the user back to the exercise list page when the "Back to Exercise List" button is selected
 function backToExerciseListButton() {
     $("#container").on("click", ".back-to-exercise-list-page-button", function(event) {
         event.preventDefault();
@@ -295,6 +312,7 @@ function backToExerciseListButton() {
     });
 }
 
+//Renders a muscle diagram based on the orientation of the target muscle(s)
 function renderMuscleDiagram(muscles, diagramOrientation) {
     let diagramMusclesURLs = "";
 
@@ -307,9 +325,10 @@ function renderMuscleDiagram(muscles, diagramOrientation) {
 
     return `<div class="diagram mobile-viewports" style="background-image:${diagramMusclesURLs}
         url(Muscle_Diagram_Images/${imageName});"></div>`;
-            
 }
 
+//Renders every muscle diagram in order to be able to utilize the two diagrams corresponding to the primary and secondary target muscles for a
+//given exercise
 function renderAllMuscleDiagrams(muscles, diagramOrientation) {
     let anteriorDiagramMusclesURLs = "";
   
@@ -346,6 +365,7 @@ function renderAllMuscleDiagrams(muscles, diagramOrientation) {
     }
 }
 
+//Renders the information for each exercise as well as the exercise info page of the application
 function renderExerciseInfo(data) {
     let equipmentTemplate = "";
     let primaryMuscleTemplate = "";
@@ -397,6 +417,7 @@ function renderExerciseInfo(data) {
     `;
 
     $(".exercise-info").append(exerciseInfoTemplate);
+
     let allMuscles = data.muscles.concat(data.muscles_secondary);
 
     let diagramOrientation = data.muscles[0].is_front;
@@ -407,6 +428,7 @@ function renderExerciseInfo(data) {
     retrieveExerciseImgFromApi(exerciseNumber, renderExerciseImages);
 }
 
+//Renders the demonstration images for each exercise
 function renderExerciseImages(data) {
     let exerciseImagesTemplate = "";
 
@@ -417,6 +439,7 @@ function renderExerciseImages(data) {
     $(".exercise-images").append(exerciseImagesTemplate);
 }
 
+//Renders the comments for each exercise(if available)
 function renderExerciseComments(data) {
     let exerciseCommentsTemplate = "";
 
@@ -427,6 +450,7 @@ function renderExerciseComments(data) {
     $(".exercise-comments").append(exerciseCommentsTemplate);
 }
 
+//Takes the user to the exercise info page corresponding to the selected exercise link
 function exerciseInfoLinkClickHandler(data) {
     $("#container").on("click", ".exercise-link", function(event) {
         event.preventDefault();
@@ -453,6 +477,7 @@ function exerciseInfoLinkClickHandler(data) {
     });
 }
 
+//Handles all of the events of the application
 function handleSubmitButtons() {
     startPageSubmitButton();
     backToHomepageButton();
