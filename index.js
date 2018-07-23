@@ -383,9 +383,15 @@ function renderExerciseInfo(data) {
         secondaryMuscleTemplate += `<p>${e.name}</p>`
     }
 
+    let secondaryMuscleDiagram = "";
+
+    if(data.muscles_secondary.length > 0) {
+        secondaryMuscleDiagram = renderMuscleDiagram(data.muscles_secondary, data.muscles_secondary[0].is_front);
+    }
+
     let primaryMuscleDiagram = renderMuscleDiagram(data.muscles, data.muscles[0].is_front);
 
-    let secondaryMuscleDiagram = renderMuscleDiagram(data.muscles_secondary, data.muscles_secondary[0].is_front);
+    //let secondaryMuscleDiagram = renderMuscleDiagram(data.muscles_secondary, data.muscles_secondary[0].is_front);
 
     let exerciseInfoTemplate = `
     <nav class="exercise-info-page-nav">
