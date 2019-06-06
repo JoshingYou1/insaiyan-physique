@@ -217,6 +217,7 @@ function renderMuscleCategoryButtons(data) {
     const muscleCategoryPage = `
     <nav class="muscle-category-page-nav">
         <button class="back-to-homepage-button">Back to Homepage</button>
+        <img class="logo" src="ss-blue-goku.png" alt=logo>
     </nav>
 
     <section class="muscle-category-page">
@@ -252,6 +253,7 @@ function renderExercisesByMuscleCategory(data) {
     <nav class="muscle-category-page-nav">
         <button class="back-to-homepage-button">Back to Homepage</button> 
         <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
+        <img class="logo" src="ss-blue-goku.png" alt=logo>
     </nav>
     <section class="exercise-list-page">
         <h2 class="recommended-exercises-h2">Recommended Exercises for ${currentMuscleCategory}</h2>
@@ -398,6 +400,7 @@ function renderExerciseInfo(data) {
         <button class="back-to-homepage-button">Back to Homepage</button>
         <button class="back-to-muscle-category-page-button">Back to Muscle Categories</button>
         <button class="back-to-exercise-list-page-button" data-category-id="${data.category.id}">Back to Exercise List</button>
+        <img class="logo" src="ss-blue-goku.png" alt=logo>
     </nav>
 
     <h2 class="exercise-name-h2">${data.name}</h2>

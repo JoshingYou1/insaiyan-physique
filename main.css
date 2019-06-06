@@ -217,8 +217,9 @@ h2 {
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    padding: 12px;
     color: #01FEFF;
+    vertical-align: middle;
+    line-height: 80px;
     
 }
 
@@ -237,7 +238,8 @@ h2 {
     overflow: hidden;
     outline: none;
     color: #01FEFF;
-    padding: 12px;
+    vertical-align: middle;
+    line-height: 80px;
 }
 
 .back-to-homepage-button:hover {
@@ -349,8 +351,8 @@ p {
     font-family: 'Boogaloo', cursive;
     color: #FFF;
     background-color: #0064C2;
-    border-radius: 50%;
-    padding: 40px;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
     margin-top: 20px;
     font-size: 50px;
@@ -412,6 +414,21 @@ iframe {
     text-align: center;
     background-color: #FFA825;
     margin: 20px;
+}
+
+.logo {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    margin: auto
+}
+
+.logo-2 {
+    height: 70px;
+    width: 70px;
 }
 
 @media only screen and (max-width: 321.9px) {
