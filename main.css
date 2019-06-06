@@ -39,6 +39,10 @@ h2 {
     font-family: 'Boogaloo', cursive;
 }
 
+button {
+    cursor: pointer;
+}
+
 .start-page {
     background: url("ss_blue_goku.jpg") no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -230,7 +234,7 @@ h2 {
 
 .back-to-homepage-button {
     font-family: 'Boogaloo', cursive;
-    font-size: 18px;
+    font-size: 20px;
     display: inline-block;
     background-color: transparent;
     border: none;
@@ -309,8 +313,9 @@ a:hover {
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    padding: 12px;
     color: #01FEFF;
+    vertical-align: middle;
+    line-height: 80px;
 }
 
 .back-to-exercise-list-page-button:hover {
@@ -333,6 +338,7 @@ p {
     font-size: 35px;
     text-align: center;
     margin-top: 80px;
+    padding: 30px;
 }
 
 .exercise-images {
@@ -421,14 +427,8 @@ iframe {
     width: 70px;
     position: absolute;
     top: 6px;
-    left: 0;
-    right: 0;
-    margin: auto
-}
-
-.logo-2 {
-    height: 70px;
-    width: 70px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 @media only screen and (max-width: 321.9px) {
@@ -448,7 +448,10 @@ iframe {
     }
 
     .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
-        font-size: 10px;
+        font-size: 12.3px;
+        line-height: unset;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     .muscle-category-h2 {
@@ -473,9 +476,9 @@ iframe {
     }
 
     .muscle-category-button:before, .muscle-category-button:after {
-    opacity: 1;
-    position: static;
-    line-height: normal;
+        opacity: 1;
+        position: static;
+        line-height: normal;
     }
 
     .recommended-exercises-h2 {
@@ -512,7 +515,7 @@ iframe {
     p {
         font-size: 20px;
         margin-top: 60px;
-        padding: 10px;
+        padding: 20px;
     }
 
     .exercise-images {
@@ -556,6 +559,9 @@ iframe {
         height: 200px;
     }
 
+    .logo {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 322px) and (max-width: 376.9px) {
@@ -575,7 +581,10 @@ iframe {
     }
 
     .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
-        font-size: 10px;
+        font-size: 14px;
+        line-height: unset;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     .muscle-category-h2 {
@@ -682,6 +691,9 @@ iframe {
         height: 220px;
     }
 
+    .logo {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 377px) and (max-width: 426.9px) {
@@ -702,7 +714,10 @@ iframe {
     }
 
     .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
-        font-size: 12px;
+        font-size: 16px;
+        line-height: unset;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     .muscle-category-h2 {
@@ -810,6 +825,9 @@ iframe {
         margin: 15px;
     }
 
+    .logo {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 427px) and (max-width: 599.9px) {
@@ -830,7 +848,10 @@ iframe {
     }
 
     .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
-        font-size: 14px;
+        font-size: 16px;
+        line-height: unset;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     .muscle-category-h2 {
@@ -937,6 +958,10 @@ iframe {
         height: 260px;
         margin: 15px;
     }
+
+    .logo {
+        display: none;
+    }
 }
         
 @media only screen and (min-width: 600px) and (max-width: 768.9px) {
@@ -958,6 +983,8 @@ iframe {
 
     .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
         font-size: 16px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .muscle-category-h2 {
@@ -1060,6 +1087,10 @@ iframe {
         height: 340px;
         margin: 15px;
     }
+
+    .logo {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1024.9px) {
@@ -1080,7 +1111,9 @@ iframe {
     }
 
     .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
-        font-size: 16px;
+        font-size: 18px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .muscle-category-h2 {
@@ -1140,7 +1173,7 @@ iframe {
     p {
         font-size: 28px;
         margin-top: 60px;
-        padding: 10px;
+        padding: 30px;
     }
 
     .exercise-images {
@@ -1181,6 +1214,9 @@ iframe {
         margin: 15px;
     }
 
+    .logo {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1025px) and (max-width: 1440.9px) {
@@ -1201,7 +1237,9 @@ iframe {
     }
 
     .back-to-homepage-button, .back-to-muscle-category-page-button, .back-to-exercise-list-page-button {
-        font-size: 16px;
+        font-size: 18px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .muscle-category-h2 {
@@ -1255,7 +1293,7 @@ iframe {
     p {
         font-size: 30px;
         margin-top: 60px;
-        padding: 10px;
+        padding: 30px;
     }
 
     .exercise-images {
