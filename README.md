@@ -2,8 +2,6 @@
 
 https://insaiyan-physique.herokuapp.com/
 
-![screenshot 1](https://github.com/JoshingYou1/workout-app-capstone/blob/master/app_screenshots/ss_blue_goku.png)
-=======
 ![Screenshot 1](https://github.com/JoshingYou1/workout-app-capstone/blob/master/app_screenshots/app_homepage.jpg)
 
 ![Screenshot 2](https://github.com/JoshingYou1/workout-app-capstone/blob/master/app_screenshots/app_muscle_category_page.jpg)
