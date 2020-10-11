@@ -338,7 +338,8 @@ p {
     font-size: 35px;
     text-align: center;
     margin-top: 80px;
-    padding: 30px;
+    padding-left: 200px;
+    padding-right: 200px;
 }
 
 .exercise-images {

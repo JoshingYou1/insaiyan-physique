@@ -1,3 +1,3 @@
 var config = {
-    YOUTUBE_KEY: "AIzaSyBYRMJPrJkVGaZgnzAtUTVilZmgo3LsGuk"
+    YOUTUBE_KEY: "AIzaSyCeo51lWAvfzXKevJnL_PNcHC4ZFo16IsI"
 }
